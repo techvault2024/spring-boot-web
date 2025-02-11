@@ -1,6 +1,7 @@
 package com.example.springbootweb;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,5 +56,17 @@ class WebControllerTest {
         mockMvc.perform(get("/hello"))
                .andExpect(status().isOk())
                .andExpect(content().contentType("text/plain;charset=UTF-8"));
+    }
+
+    @Test
+    void testHomeEndpointWithPost() throws Exception {
+        mockMvc.perform(post("/"))
+               .andExpect(status().isMethodNotAllowed());
+    }
+
+    @Test
+    void testHelloEndpointWithPost() throws Exception {
+        mockMvc.perform(post("/hello"))
+               .andExpect(status().isMethodNotAllowed());
     }
 }
