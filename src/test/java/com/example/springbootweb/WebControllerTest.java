@@ -10,13 +10,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(WebController.class)
-public class WebControllerTest {
+class WebControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testHomeEndpoint() throws Exception {
+    void testHomeEndpoint() throws Exception {
         mockMvc.perform(get("/"))
                .andExpect(status().isOk())
                .andExpect(content().string("Hello, Spring Boot!"));
@@ -27,7 +27,7 @@ public class WebControllerTest {
      * Verifies that the endpoint returns "Hello, World!" with a 200 OK status
      */
     @Test
-    public void testHelloEndpoint() throws Exception {
+    void testHelloEndpoint() throws Exception {
         mockMvc.perform(get("/hello"))
                .andExpect(status().isOk())
                .andExpect(content().string("Hello, World!"));
@@ -38,20 +38,20 @@ public class WebControllerTest {
      * Verifies that the endpoint returns a 404 Not Found status
      */
     @Test
-    public void testNonExistentEndpoint() throws Exception {
+    void testNonExistentEndpoint() throws Exception {
         mockMvc.perform(get("/nonexistent"))
                .andExpect(status().isNotFound());
     }
 
     @Test
-    public void testHomeEndpointContentType() throws Exception {
+    void testHomeEndpointContentType() throws Exception {
         mockMvc.perform(get("/"))
                .andExpect(status().isOk())
                .andExpect(content().contentType("text/plain;charset=UTF-8"));
     }
 
     @Test
-    public void testHelloEndpointContentType() throws Exception {
+    void testHelloEndpointContentType() throws Exception {
         mockMvc.perform(get("/hello"))
                .andExpect(status().isOk())
                .andExpect(content().contentType("text/plain;charset=UTF-8"));
