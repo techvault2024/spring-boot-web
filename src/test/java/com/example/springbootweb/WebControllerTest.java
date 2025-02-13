@@ -82,4 +82,3 @@ class WebControllerTest {
                .andExpect(status().isMethodNotAllowed());
     }
 }
-}
