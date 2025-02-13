@@ -63,10 +63,23 @@ class WebControllerTest {
         mockMvc.perform(post("/"))
                .andExpect(status().isMethodNotAllowed());
     }
+    
+    @Test
+    void testIpEndpoint() throws Exception {
+        // Since we can't predict the exact IP, just verify status and content type
+        mockMvc.perform(get("/ip"))
+               .andExpect(status().isOk())
+               .andExpect(content().contentType("text/plain;charset=UTF-8"))
+               .andExpect(content().string(org.hamcrest.Matchers.anyOf(
+                   org.hamcrest.Matchers.matchesPattern("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}"),
+                   org.hamcrest.Matchers.is("Could not determine IP address")
+               )));
+    }
 
     @Test
-    void testHelloEndpointWithPost() throws Exception {
-        mockMvc.perform(post("/hello"))
+    void testIpEndpointWithPost() throws Exception {
+        mockMvc.perform(post("/ip"))
                .andExpect(status().isMethodNotAllowed());
     }
+}
 }

@@ -16,3 +16,11 @@ public class WebController {
         return "Hello, World!";
     }
 }
+@GetMapping("/ip")
+public String getIpAddress() {
+    try {
+        return java.net.InetAddress.getLocalHost().getHostAddress();
+    } catch (java.net.UnknownHostException e) {
+        return "Could not determine IP address";
+    }
+}
